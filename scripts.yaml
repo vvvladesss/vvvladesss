@@ -1,0 +1,94 @@
+'1588323521962':
+  alias: Станция Мой трек-лист
+  sequence:
+  - data:
+      command: sendText
+      entity_id: media_player.yandex_station_6430789183243016024f
+      text: Включи мой трек-лист
+    service: yandex_station.send_command
+'1588323698285':
+  alias: Станция Мой трек-лист в случайном порядке
+  sequence:
+  - data:
+      command: sendText
+      entity_id: media_player.yandex_station_6430789183243016024f
+      text: Включи мой трек-лист в случайном порядке
+    service: yandex_station.send_command
+'1588324008534':
+  alias: Станция - Трек-лист для Насти
+  sequence:
+  - data:
+      command: sendText
+      entity_id: media_player.yandex_station_6430789183243016024f
+      text: Включи мой плей-лист Anastasia1996littlegirl
+    service: yandex_station.send_command
+'1588324791946':
+  alias: Станция Трек-лист для Насти в случайном порядке
+  sequence:
+  - data:
+      command: sendText
+      entity_id: media_player.yandex_station_6430789183243016024f
+      text: Включи мой Anastasia1996littlegirl в случайном порядке
+    service: yandex_station.send_command
+'1588603313785':
+  alias: Станция - Алиса громкость -
+  sequence:
+  - data: {}
+    entity_id: media_player.yandex_station_6430789183243016024f
+    service: media_player.volume_down
+'1588603342765':
+  alias: Станция - Алиса громкость +
+  sequence:
+  - data: {}
+    entity_id: media_player.yandex_station_6430789183243016024f
+    service: media_player.volume_up
+'1591713632870':
+  alias: Irbis A - громкость +
+  sequence:
+  - data: {}
+    entity_id: media_player.yandex_station_ff98f01046e58a61709ff008
+    service: media_player.volume_up
+'1591713668965':
+  alias: Irbis A - громкость -
+  sequence:
+  - data: {}
+    entity_id: media_player.yandex_station_ff98f01046e58a61709ff008
+    service: media_player.volume_down
+'1591716686526':
+  alias: Irbis A - Мой трек-лист
+  sequence:
+  - data:
+      media_content_id: Включи мой трек-лист
+      media_content_type: command
+    entity_id: media_player.yandex_station_ff98f01046e58a61709ff008
+    service: media_player.play_media
+'1591716766023':
+  alias: Irbis A - Мой трек-лист в случайном порядке
+  sequence:
+  - data:
+      media_content_id: Включи мой трек-лист в случайном порядке
+      media_content_type: command
+    entity_id: media_player.yandex_station_ff98f01046e58a61709ff008
+    service: media_player.play_media
+  mode: single
+'1591716886247':
+  alias: Irbis A - Трек-лист для Насти
+  sequence:
+  - data:
+      media_content_id: Включи мой плей-лист Anastasia1996littlegirl
+      media_content_type: command
+    entity_id: media_player.yandex_station_ff98f01046e58a61709ff008
+    service: media_player.play_media
+'1591716965064':
+  alias: Irbis A - Трек-лист для Насти в случайном порядке
+  sequence:
+  - data:
+      media_content_id: Включи мой Anastasia1996littlegirl в случайном порядке
+      media_content_type: command
+    entity_id: media_player.yandex_station_ff98f01046e58a61709ff008
+    service: media_player.play_media
+purge:
+  alias: Purge
+  sequence:
+  - service: recorder.purge
+  mode: single
