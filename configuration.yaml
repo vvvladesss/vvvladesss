@@ -1,0 +1,138 @@
+
+## Conf. a default setup of Home Assistant ####
+default_config:
+
+homeassistant:
+  customize: !include customize.yaml
+
+
+
+############## Text to speech #################
+#tts:
+#  - platform: google_translate
+#---------------------------------------------#
+
+
+############## Вынос в файлы ##################
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+recorder: !include HA/recorder.yaml
+#---------------------------------------------#
+
+
+
+############## Вынос в папки #################
+sensor: !include_dir_merge_list HA/sensor
+#---------------------------------------------#
+
+mqtt:
+  broker: 10.0.0.10
+
+
+############# Перенос в интреграции ##########
+# Аккаунт Xiaomi                             #
+#xiaomi_aqara:                               #
+#  discovery_retry: 10                       #
+#  gateways:                                 #
+#    - mac: !secret_mac_xi                   #
+#      key: !secret_key_xi                   #
+#--------------------------------------------#
+
+
+
+############# Настройки Яндекс станций и УДЯ #
+yandex_station:
+  username: !secret_yandex.ru
+  password: !secret_ya_pass
+  tts_service_name: alice_say
+  recognition_lang: ru-RU
+  include:
+  - Кондиционер
+  - Телевизор
+  
+yandex_smart_home:
+#---------------------------------------------#
+
+
+
+############## Настройка устройств Sonoff #####
+sonoff:
+  username: !secret_mail.ru
+  password: !secret_mail_pass
+#---------------------------------------------#
+
+
+
+############## Лампочка в гардеробе ###########
+#light:
+#  - platform: xiaomi_miio
+#    name: Xiaomi Philips 
+#    host: 10.0.0.94
+#    token: !secret_token_downlight
+#    model: philips.light.downlight
+#---------------------------------------------#
+
+
+
+############## Настройка пылесоса #############
+vacuum:
+  - platform: miio2
+    host: 10.0.0.101
+    token: !secret_token_vac
+#---------------------------------------------#
+
+
+
+############## Bluetooth монитор #############
+ble_monitor:
+  rounding: True
+  decimals: 1
+  period: 5
+  log_spikes: False
+  use_median: False
+  active_scan: False
+  hci_interface: 0
+  batt_entities: True
+  discovery: True
+  report_unknown: False
+  devices:
+    - mac: !secret_mac_bt_1
+      name: 'Bt_temp_1'
+#      encryption_key: '!secret_mac_bt_1_encryption'
+      temperature_unit: C
+    - mac: !secret_mac_bt_2
+      name: 'Bt_temp_2'
+#      encryption_key: '!secret_mac_bt_2_encryption'
+      temperature_unit: C
+#---------------------------------------------#
+
+
+
+############## Телеграмм ######################
+telegram_bot:
+  - platform: polling
+    api_key: !secret_api_key
+    allowed_chat_ids:
+#       - -111
+       - 222
+
+notify:
+#  - name: telegram
+#    platform: telegram
+#    chat_id: -111
+    
+  - name: telegram
+    platform: telegram
+    chat_id: 222
+#---------------------------------------------#
+
+
+
+############# Логер ##########################
+logger:
+  default: critical
+#---------------------------------------------#
+
+

@@ -1,0 +1,531 @@
+- id: '1587474226938'
+  alias: Туалет - Свет в туалете - отключение
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0003207a74
+    from: 'on'
+    platform: state
+    to: 'off'
+    for: '5'
+  condition: []
+  action:
+  - data: {}
+    entity_id: switch.wall_switch_ln_158d00044b38e3
+    service: switch.turn_off
+  mode: single
+- id: '1587811317969'
+  alias: Алиса - кубик - старт/стоп трека
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 6598d8a3a7c5c0a31c6a93bccfb636b1
+    type: action
+    subtype: shake
+    discovery_id: 0x00158d00029ba496 action_shake
+  condition: []
+  action:
+  - data: {}
+    entity_id: media_player.yandex_station_6430789183243016024f
+    service: media_player.media_play_pause
+  mode: single
+- id: '1587816864260'
+  alias: Алиса - кубик - следующий трек
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 6598d8a3a7c5c0a31c6a93bccfb636b1
+    type: action
+    subtype: flip90
+    discovery_id: 0x00158d00029ba496 action_flip90
+  condition: []
+  action:
+  - data: {}
+    entity_id: media_player.yandex_station_6430789183243016024f
+    service: media_player.media_next_track
+  mode: single
+- id: '1588871592200'
+  alias: Телеграм - vlades прибыл на Верейскую
+  description: ''
+  trigger:
+  - entity_id: person.vlades
+    event: enter
+    platform: zone
+    zone: zone.na_rabote
+  condition: []
+  action:
+  - data:
+      message: vlades прибыл в расположение врага!
+    service: notify.telegram
+- id: '1588882361181'
+  alias: Телеграм - Anastasia ушла с работы
+  description: ''
+  trigger:
+  - entity_id: person.anastasia
+    event: leave
+    platform: zone
+    zone: zone.na_rabote
+  condition: []
+  action:
+  - data:
+      message: Anastasia ушла с работы
+    service: notify.telegram
+- id: '1588940093020'
+  alias: Телеграм - меню
+  description: ''
+  trigger:
+  - event_data:
+      command: /start
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - data:
+      data:
+        keyboard:
+        - /Включить_свет, /Выключить_свет
+        - /Состояние_квартиры
+        - /Фото, /Видео, /О_системе
+      message: commands
+    service: notify.telegram
+  mode: single
+- id: '1589661996463'
+  alias: Телеграм - Anastasia прибыла на Верейскую
+  description: ''
+  trigger:
+  - entity_id: person.anastasia
+    event: enter
+    platform: zone
+    zone: zone.na_rabote
+  condition: []
+  action:
+  - data:
+      message: Anastasia прибыла на Верейского
+    service: notify.telegram
+  mode: single
+- id: '1593458438780'
+  alias: Телеграм - включить весь свет
+  description: ''
+  trigger:
+  - event_data:
+      command: /Включить_свет
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - data: {}
+    entity_id: light.bf36db0774f1f890e1rqbk
+    service: light.turn_on
+  - data: {}
+    service: light.turn_on
+    target:
+      entity_id: light.bf4672b77e4b3cdd33gdfy
+  mode: single
+- id: '1593459349403'
+  alias: Телеграм - выключить весь свет
+  description: ''
+  trigger:
+  - event_data:
+      command: /Выключить_свет
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - data: {}
+    entity_id: light.bf36db0774f1f890e1rqbk
+    service: light.turn_off
+  - data: {}
+    entity_id: light.bf4672b77e4b3cdd33gdfy
+    service: light.turn_off
+  mode: single
+- id: '1597253203299'
+  alias: Телеграм - Состояние квартиры
+  description: ''
+  trigger:
+  - event_data:
+      command: /Состояние_квартиры
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - data:
+      message: "Состояние квартиры {{ states(\"sensor.date\") }}:\n\n    Освещение:\n\
+        \     Освещение в коридоре:         {{ states(\"switch.vykliuchatel_v_koridore\"\
+        ) }}.\n     Освещение в туалете:          {{ states(\"switch.vykliuchatel_v_tualete\"\
+        ) }}.\n     Освещение на кухне:           {{ states(\"switch.vykliuchatel_na_kukhne_right\"\
+        ) }}.\n     Подсветка на кухне:           {{ states(\"switch.sonoff_100089877e\"\
+        ) }}.    \n     Освещение барной стойки:      {{ states(\"switch.vykliuchatel_na_kukhne_left\"\
+        ) }}.\n     Освещение в гостиной:         {{ states(\"switch.vykliuchatel_v_gostinoi_left\"\
+        ) }}.\n     Боковое освещение в гостиной: {{ states(\"switch.vykliuchatel_v_gostinoi_right\"\
+        ) }}.\n     Выключатель спальня:  ДОДЕЛАТЬ .\n     Выключатель гардероб: \
+        \        {{ states(\"light.xiaomi_philips\") }}.\n     \n    Датчики движения:\n\
+        \     Датчик 1 {{ states(\"binary_sensor.motion_sensor_158d0003207a74\") }}.\n\
+        \     Датчик 2 {{ states(\"binary_sensor.motion_sensor_158d0003207a74\") }}.\n\
+        \     Датчик 3 {{ states(\"binary_sensor.motion_sensor_158d0003207a74\") }}.\n\
+        \    \n    Датчики открытия:\n     Датчик 1 {{ states(\"binary_sensor.door_window_sensor_158d0004532002\"\
+        ) }}.\n     Датчик 2 {{ states(\"binary_sensor.door_window_sensor_158d000521d130\"\
+        ) }}.\n     Датчик 3 {{ states(\"binary_sensor.door_window_sensor_158d000521e43b\"\
+        ) }}.\n     Датчик 4 {{ states(\"binary_sensor.door_window_sensor_158d000521e48d\"\
+        ) }}.\n     Датчик 5 {{ states(\"binary_sensor.door_window_sensor_158d000521e49d\"\
+        ) }}.\n     \n    Датчики протечки:\n     Датчик 1 {{ states(\"binary_sensor.water_leak_sensor_158d000479d697\"\
+        ) }}.\n     Датчик 2 {{ states(\"binary_sensor.water_leak_sensor_158d00047e5947\"\
+        ) }}.\n   \n    Температура и влажность:\n     Температура {{ states(\"sensor.ble_temperature_bt_temp_1\"\
+        ) }} °C.\n     Влажность {{ states(\"sensor.ble_humidity_bt_temp_1\") }} %.\n\
+        \     \n    Освещенность в квартире: \n     По состоянию на {{ states(\"sensor.time\"\
+        ) }} - {{ states(\"sensor.illumination_50ec50c6c947\") }} lm.\n"
+    service: notify.telegram
+  mode: single
+- id: '1597577984701'
+  alias: Телеграм - О системе
+  description: ''
+  trigger:
+  - event_data:
+      command: /О_системе
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - data:
+      message: "- О системе умный дом:\n    {{\"\\U0001F4BB\"}}   Основной сервер:\
+        \ Raspberry Pi 4b\n    {{\"\\U0001F4BB\"}}   Не установлено обновлений: {{\
+        \ states(\"sensor.hacs\") }}\n    {{\"\\U0001F4C8\"}}   Загрузка ЦПУ: {{ states(\"\
+        sensor.processor_use_percent\") }} %\n    {{\"\\U0001F4A4\"}}   Использованение\
+        \ ОЗУ: {{ states(\"sensor.memory_use_percent\") }} %\n    {{\"\\U0001F193\"\
+        }}   Свободное пространсво: {{ states(\"sensor.disk_free\") }} Gb\n    {{\"\
+        \\U0001F525\"}}   Температура сервера: {{ states(\"sensor.raspberry_c_temp\"\
+        ) }} °C  \n- И тд.\n"
+    service: notify.telegram
+  mode: single
+- id: '1603392394596'
+  alias: Кам - Фото с камеры
+  description: ''
+  trigger:
+  - event_data:
+      command: /Фото
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - service: camera.snapshot
+    data:
+      filename: /config/www/cam_captures/reolink.jpg
+    entity_id: camera.reolink_e1_pro_profile000_mainstream
+  - service: telegram_bot.send_photo
+    data:
+      file: /config/www/cam_captures/reolink.jpg
+  mode: single
+- id: '1603393509702'
+  alias: Кам - Видео с камеры
+  description: ''
+  trigger:
+  - event_data:
+      command: /Видео
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - service: camera.record
+    data:
+      filename: /config/www/cam_captures/reolink.mp4
+      duration: 10
+    entity_id: camera.reolink_e1_pro_profile000_mainstream
+  - delay: 00:00:30
+  - service: telegram_bot.send_video
+    data:
+      file: /config/www/cam_captures/reolink.mp4
+  mode: single
+- id: '1611518943337'
+  alias: Свет - Подсветка кухни с кнопки включения - вкл
+  description: ''
+  trigger:
+  - platform: state
+    from: 'off'
+    to: 'on'
+    entity_id: switch.vykliuchatel_na_kukhne_left
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.sonoff_100089877e
+  mode: single
+- id: '1611518991707'
+  alias: Свет - Подсветка кухни с кнопки включения - выкл
+  description: ''
+  trigger:
+  - platform: state
+    to: 'off'
+    from: 'on'
+    entity_id: switch.vykliuchatel_na_kukhne_left
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.sonoff_100089877e
+  mode: single
+- id: '1612724263947'
+  alias: Туалет - Вытяжка в туалете от влажности - вкл
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.ble_humidity_bt_temp_1
+    attribute: median
+    above: '60'
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.sonoff_100089dd28
+  mode: single
+- id: '1615282731671'
+  alias: Туалет - Вкл\выкл вентиляция в туалете
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 693f181f9c622720bc9db931d17780de
+    type: click
+    subtype: single
+    discovery_id: 0x00158d000404e060 click_single
+  condition: []
+  action:
+  - service: switch.toggle
+    target:
+      entity_id: switch.sonoff_100089dd28
+  mode: single
+- id: '1615287576458'
+  alias: Туалет - Кнопка в туалете включение света дабл клик
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 693f181f9c622720bc9db931d17780de
+    type: click
+    subtype: double
+    discovery_id: 0x00158d000404e060 click_double
+  condition: []
+  action:
+  - service: switch.toggle
+    target:
+      device_id: e8e2bff274f9612e546ac21a8630c579
+  mode: single
+- id: '1615290009462'
+  alias: Алиса - кубик - тише
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 6598d8a3a7c5c0a31c6a93bccfb636b1
+    type: action
+    subtype: rotate_left
+    discovery_id: 0x00158d00029ba496 action_rotate_left
+  condition:
+  - condition: device
+    device_id: 8c45604cc122cce95c4571f69e5db522
+    domain: media_player
+    entity_id: media_player.yandex_station_6430789183243016024f
+    type: is_playing
+  action:
+  - data: {}
+    entity_id: media_player.yandex_station_6430789183243016024f
+    service: media_player.volume_down
+  mode: single
+- id: '1615290098601'
+  alias: Алиса - кубик - громче
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 6598d8a3a7c5c0a31c6a93bccfb636b1
+    type: action
+    subtype: rotate_right
+    discovery_id: 0x00158d00029ba496 action_rotate_right
+  condition:
+  - condition: device
+    device_id: 8c45604cc122cce95c4571f69e5db522
+    domain: media_player
+    entity_id: media_player.yandex_station_6430789183243016024f
+    type: is_playing
+  action:
+  - data: {}
+    entity_id: media_player.yandex_station_6430789183243016024f
+    service: media_player.volume_up
+  mode: single
+- id: '1615294441821'
+  alias: Вода - Протечка в туалете
+  description: ''
+  trigger:
+  - type: moist
+    platform: device
+    device_id: 029202f9f6e621b140ffd3d1f9c62c90
+    entity_id: binary_sensor.datchik_protechki_v_tualete_water_leak
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      device_id: e8e2bff274f9612e546ac21a8630c579
+  - service: notify.telegram
+    data:
+      message: Протечка в туалете!!!
+  - service: notify.telegram
+    data:
+      message: Протечка в туалете!!!
+  - service: notify.telegram
+    data:
+      message: Протечка в туалете!!!
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.7
+    target:
+      device_id: 8c45604cc122cce95c4571f69e5db522
+  - service: media_player.play_media
+    data:
+      media_content_type: text
+      media_content_id: Обнаружена протечка в туалете! Обнаружена протечка в туалете!
+        Обнаружена протечка в туалете!
+    target:
+      entity_id: media_player.yandex_station_6430789183243016024f
+  mode: single
+- id: '1615294868609'
+  alias: Вода - Протечка на кухне
+  description: ''
+  trigger:
+  - type: moist
+    platform: device
+    device_id: b8ba62bf9c40b6a7805bcd7c455720ef
+    entity_id: binary_sensor.datchik_protechki_na_kukhne_water_leak
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id:
+      - switch.vykliuchatel_na_kukhne_right
+  - service: notify.telegram
+    data:
+      message: Протечка на кухне!!!
+  - service: notify.telegram
+    data:
+      message: Протечка на кухне!!!
+  - service: notify.telegram
+    data:
+      message: Протечка на кухне!!!
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.7
+    target:
+      device_id: 8c45604cc122cce95c4571f69e5db522
+  - service: media_player.play_media
+    data:
+      media_content_type: text
+      media_content_id: 'Обнаружена протечка на кухне! Обнаружена протечка на кухне!
+        Обнаружена протечка на кухне! '
+    target:
+      entity_id: media_player.yandex_station_6430789183243016024f
+  mode: single
+- id: '1615582195418'
+  alias: Алиса - кубик - предыдущий трек
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: media_player.media_previous_track
+    target:
+      device_id: 8c45604cc122cce95c4571f69e5db522
+  mode: single
+- id: '1615724846208'
+  alias: Туалет - Вытяжка в туалете от влажности - выкл
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.ble_humidity_bt_temp_1
+    attribute: median
+    below: '60'
+  condition: []
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.sonoff_100089dd28
+  mode: single
+- id: '1616312091361'
+  alias: Свет - Вкл\выкл света в гардеробе
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 7c1bf172776b660d2c1fd75e00ed5d7c
+    type: click
+    subtype: single
+    discovery_id: 0x00158d000404fcd3 click_single
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id: light.xiaomi_philips
+  mode: single
+- id: '1616312142837'
+  alias: Свет - Включение света при открывании входной двери
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: ccb7a70a3d9374f77b9f737a7e05890f
+    entity_id: binary_sensor.datchik_otkrytiia_vkhodnoi_dveri_contact
+    domain: binary_sensor
+  condition:
+  - condition: time
+    after: '17:00:00'
+    before: 07:00:00
+  action:
+  - type: turn_on
+    device_id: b78bffc239744d12c70693f75fc678e7
+    entity_id: switch.vykliuchatel_v_koridore
+    domain: switch
+  mode: single
+- id: '1616312187635'
+  alias: Свет - Туалет - Включение света в туалете по движению
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: f689e5de9e0c20004da8fa47e3108cf2
+    entity_id: binary_sensor.datchik_dvizheniia_v_tualete_occupancy
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      device_id: e8e2bff274f9612e546ac21a8630c579
+  mode: restart
+- id: '1616442522563'
+  alias: Считана метка Выключение света и включение пылесоса
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 24a37b77-2790-43b0-b19c-0ef6a79ebb89
+  condition: []
+  action:
+  - type: turn_off
+    device_id: e8e2bff274f9612e546ac21a8630c579
+    entity_id: switch.vykliuchatel_v_tualete
+    domain: switch
+  mode: single
+- id: '1616880790639'
+  alias: Гардероб дабл клик свет
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 7c1bf172776b660d2c1fd75e00ed5d7c
+    type: click
+    subtype: double
+    discovery_id: 0x00158d000404fcd3 click_double
+  condition: []
+  action:
+  - service: switch.toggle
+    target:
+      entity_id:
+      - switch.vykliuchatel_v_spalne_left
+  mode: single

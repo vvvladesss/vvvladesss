@@ -1,0 +1,91 @@
+sensor.battery_158d00047e5947:
+  friendly_name: Батарея - датчик протечки - кухня
+binary_sensor.door_window_sensor_158d0004532002:
+  device_class: window
+binary_sensor.door_window_sensor_158d000521d130:
+  device_class: window
+binary_sensor.door_window_sensor_158d000521e43b:
+  device_class: window
+binary_sensor.door_window_sensor_158d000521e48d:
+  device_class: window
+binary_sensor.door_window_sensor_158d000521e49d:
+  device_class: door
+switch.wall_switch_ln_158d00044b38e3:
+  icon: mdi:dome-light
+  friendly_name: Освещение в туалете
+switch.sonoff_100089dd28:
+  icon: mdi:fan
+switch.wall_switch_ln_158d00042af971:
+  icon: mdi:track-light
+  friendly_name: Освещение в коридоре
+light.xiaomi_philips:
+  friendly_name: Philips гардероб
+switch.wall_switch_ln_right_158d000428222c:
+  icon: mdi:track-light
+  friendly_name: Боковое освещение в гостиной
+light.gateway_light_50ec50c6c947:
+  icon: mdi:hazard-lights
+  friendly_name: Подсветка Хаба Xiaomi
+switch.wall_switch_ln_left_158d000428222c:
+  friendly_name: Реле основное освещение в гостиной
+switch.wall_switch_ln_left_158d0004232dae:
+  friendly_name: Освещение барной стойки
+switch.wall_switch_ln_right_158d0004232dae:
+  friendly_name: Основное освещение кухни
+light.10_0_0_122:
+  friendly_name: Основное освещение - гостиная
+light.10_0_0_122_ambilight:
+  friendly_name: Ambiligh - гостинная
+switch.wall_switch_ln_right_158d00042e6391:
+  friendly_name: Реле основное освещение - спальня
+switch.wall_switch_ln_left_158d00042e6391:
+  friendly_name: Боковое освещение в спальне
+binary_sensor.10_0_0_122_nightlight:
+  friendly_name: Сенсор освещения - гостинная
+binary_sensor.motion_sensor_158d000541496a:
+  friendly_name: Датчик движения - 1
+binary_sensor.motion_sensor_158d0003207a74:
+  friendly_name: Датчик движения - туалет
+sensor.battery_158d0003207a74:
+  friendly_name: Батарея - датчик движения - туалет
+light.yeelight_ceiling20_0x00000000124f9667:
+  friendly_name: Основное освещение - спальня
+light.yeelight_ceiling20_0x00000000124f9667_ambilight:
+  friendly_name: Ambiligh - спальня
+switch.vykliuchatel_v_gostinoi_left:
+  friendly_name: Реле основное освещение - гостиная
+  icon: mdi:dome-light
+switch.vykliuchatel_v_gostinoi_right:
+  friendly_name: Боковое освещение в гостиной
+  icon: mdi:track-light
+switch.vykliuchatel_v_koridore:
+  friendly_name: Освещение в коридоре
+  icon: mdi:vanity-light
+switch.vykliuchatel_v_tualete:
+  friendly_name: Освещение в туалете
+switch.vykliuchatel_na_kukhne_left:
+  friendly_name: Освещение барной стойки
+switch.vykliuchatel_na_kukhne_right:
+  friendly_name: Основное освещение на кухне
+switch.vykliuchatel_v_spalne_left:
+  friendly_name: Боковое освещение в спальне
+  icon: mdi:track-light
+switch.vykliuchatel_v_spalne_right:
+  friendly_name: Реле основное освещение - спальня
+  icon: mdi:dome-light
+switch.sonoff_100089877e:
+  icon: mdi:spotlight-beam
+sensor.vykliuchatel_v_koridore_temperature:
+  icon: mdi:hydraulic-oil-temperature
+sensor.vykliuchatel_v_spalne_temperature:
+  icon: mdi:hydraulic-oil-temperature
+sensor.vykliuchatel_v_tualete_temperature:
+  icon: mdi:hydraulic-oil-temperature
+sensor.vykliuchatel_v_gostinoi_temperature:
+  icon: mdi:hydraulic-oil-temperature
+sensor.vykliuchatel_na_kukhne_temperature:
+  icon: mdi:hydraulic-oil-temperature
+sensor.ble_battery_bt_temp_1:
+  friendly_name: Заряд датчика темп\влаж в туалете
+sensor.ble_battery_bt_temp_2:
+  friendly_name: Заряд датчика темп\влаж в коридоре
